@@ -1,6 +1,6 @@
-# Oracle ZDM Migration Runbook
+# Oracle ZDM Migration Runbook (Guia de Migração)
 
-[English](./README-oracle-zdm-migration-runbook.md) | [Português (Brasil)](./README-oracle-zdm-migration-runbook.pt-BR.md)
+[English](./README-oracle-zdm-migration-runbook.md) | **Português (Brasil)**
 
 ## Overview
 
