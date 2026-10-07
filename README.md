@@ -24,6 +24,28 @@ This runbook assumes the most common initial scenario:
 
 ---
 
+## Procedure architecture
+
+```mermaid
+flowchart LR
+    SRC[("Oracle source<br/>primary database")]
+    TGT[("Oracle target<br/>standby during migration")]
+    ZDM["ZDM host<br/>evaluate, orchestrate and monitor"]
+    subgraph INITIAL["Initial data movement"]
+        RMAN["RMAN backup / restore<br/>ONLINE_PHYSICAL method"]
+    end
+    subgraph SYNC["Continuous synchronization"]
+        DG["Data Guard<br/>redo transport and apply"]
+    end
+    SRC --> RMAN --> TGT
+    SRC --> DG --> TGT
+    ZDM -. "Orchestrate" .-> RMAN
+    ZDM -. "Orchestrate" .-> DG
+    TGT --> CUT["Coordinated switchover<br/>target becomes primary"]
+    ZDM -. "Control migration" .-> CUT
+    CUT --> APP["Application on target"]
+```
+
 ## 1. Provision the ZDM Host
 
 ### 1.1 Host requirements
